@@ -1,0 +1,40 @@
+<div class="container d-flex justify-content-center align-items-center vh-100" dir="rtl">
+  <div class="card shadow p-4" style="width: 400px;">
+    <h3 class="text-center mb-4">تسجيل الدخول</h3>
+
+    <form (ngSubmit)="login()">
+      <div class="mb-3">
+        <label for="email" class="form-label">البريد الإلكتروني</label>
+        <input
+          [(ngModel)]="email"
+          name="email"
+          type="email"
+          id="email"
+          class="form-control"
+          placeholder="أدخل بريدك الإلكتروني"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">كلمة المرور</label>
+        <input
+          [(ngModel)]="password"
+          name="password"
+          type="password"
+          id="password"
+          class="form-control"
+          placeholder="أدخل كلمة المرور"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">دخول</button>
+    </form>
+
+    <p class="text-center mt-3 mb-0">
+      لا تمتلك حساباً؟
+      <a routerLink="/signup" class="text-decoration-none">سجّل الآن</a>
+    </p>
+  </div>
+</div>

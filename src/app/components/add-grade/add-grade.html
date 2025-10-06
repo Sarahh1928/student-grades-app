@@ -1,0 +1,60 @@
+<div class="container mt-5" dir="rtl">
+  <div class="card shadow p-4">
+    <h3 class="text-center mb-4 text-primary fw-bold">إضافة درجة</h3>
+
+    <form (ngSubmit)="addGrade()" #gradeForm="ngForm">
+      <div class="mb-3">
+        <label for="student" class="form-label">اختر الطالب:</label>
+        <select
+          id="student"
+          class="form-select"
+          [(ngModel)]="selectedStudentId"
+          name="student"
+          required
+        >
+          <option value="" disabled selected>اختر الطالب</option>
+          <option *ngFor="let student of students$ | async" [value]="student.id">
+            {{ student.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="exam" class="form-label">نوع الامتحان:</label>
+        <input
+          type="text"
+          id="exam"
+          name="exam"
+          class="form-control"
+          [(ngModel)]="exam"
+          placeholder="مثلاً: نصف الترم، النهائي، كويز 1"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="grade" class="form-label">الدرجة:</label>
+        <input
+          type="number"
+          id="grade"
+          name="grade"
+          class="form-control"
+          [(ngModel)]="grade"
+          required
+          min="0"
+          max="100"
+          placeholder="أدخل الدرجة (من 0 إلى 100)"
+        />
+      </div>
+
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-success w-50 me-2">إضافة</button>
+        <button type="button" class="btn btn-outline-secondary w-50" (click)="goBack()">رجوع</button>
+      </div>
+    </form>
+
+    <div *ngIf="message" class="alert alert-info mt-4 text-center">
+      {{ message }}
+    </div>
+  </div>
+</div>
