@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>تعديل درجة الطالب</h2>
+<div mat-dialog-content>
+    <p><strong>الطالب:</strong> {{ data.studentName }}</p>
+    <div class="form-group mb-3"> <label>درجة التقييم</label> <input type="number" class="form-control"
+            [(ngModel)]="data.daraga" /> </div>
+    <div class="form-group mb-3"> <label>امتحان</label> <input type="number" class="form-control"
+            [(ngModel)]="data.emthan" /> </div>
+    <div class="form-group mb-3"> <label>مواظبة</label> <input type="number" class="form-control"
+            [(ngModel)]="data.mwazba" /> </div>
+</div>
+<div mat-dialog-actions align="end"> <button mat-button (click)="cancel()">إلغاء</button> <button mat-raised-button
+        color="primary" (click)="save()">حفظ</button> </div>

@@ -7,29 +7,66 @@
     </div>
   </div>
 
+  <div class="card shadow-sm p-3 mb-4">
+    <div class="row g-3 align-items-center">
+      <div class="col-md-4">
+        <label for="weekSelect" class="form-label">اختر الأسبوع:</label>
+        <select id="weekSelect" class="form-select" [(ngModel)]="selectedWeek" (change)="filterByWeek()">
+          <option value="">كل الأسابيع</option> <!-- empty string = all weeks -->
+          <option *ngFor="let week of availableWeeks" [value]="week">{{ 'الأسبوع ' + week }}</option>
+        </select>
+
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">متوسط التقييمات:</label>
+        <div class="d-flex gap-2">
+          <input type="text" class="form-control" [value]="averageDaraga | number:'1.0-2'" readonly
+            placeholder="درجة التقييم" />
+          <input type="text" class="form-control" [value]="averageEmthan | number:'1.0-2'" readonly
+            placeholder="امتحان" />
+          <input type="text" class="form-control" [value]="averageMwazba | number:'1.0-2'" readonly
+            placeholder="مواظبة" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <div class="card shadow-sm">
     <div class="card-body">
-      <h5 class="card-title mb-3">درجات جميع الطلاب</h5>
+      <h5 class="card-title mb-3">درجات جميع الطلاب للأسبوع {{ selectedWeek }}</h5>
+      <div *ngIf="dataLoaded">
+        <table class="table table-striped" *ngIf="filteredGrades.length > 0; else noGrades">
+          <thead class="table-dark">
+            <tr>
+              <th>اسم الطالب</th>
+              <th>درجة التقييم</th>
+              <th>امتحان</th>
+              <th>مواظبة</th>
+              <th>إجراءات</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let grade of filteredGrades">
+              <td>{{ grade.studentName || 'غير متوفر' }}</td>
+              <td>{{ grade.daraga }}</td>
+              <td>{{ grade.emthan }}</td>
+              <td>{{ grade.mwazba }}</td>
+              <td>
+                <button class="btn btn-sm btn-warning me-2" (click)="openEditDialog(grade)">تعديل</button>
+                <button class="btn btn-sm btn-danger" (click)="deleteGrade(grade)">حذف</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-      <table class="table table-striped" *ngIf="grades$ | async as grades; else noGrades">
-        <thead class="table-dark">
-          <tr>
-            <th>اسم الطالب</th>
-            <th>الامتحان</th>
-            <th>الدرجة</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let grade of grades">
-            <td>{{ grade.studentName || 'غير متوفر' }}</td>
-            <td>{{ grade.exam || 'غير متوفر' }}</td>
-            <td>{{ grade.grade || 'غير متوفر' }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <ng-template #loading>
+        <p class="text-center text-muted mt-3">جاري تحميل البيانات...</p>
+      </ng-template>
 
       <ng-template #noGrades>
-        <p class="text-center text-muted mt-3">لم تتم إضافة أي درجات بعد.</p>
+        <p class="text-center text-muted mt-3">لا توجد درجات لهذا الأسبوع بعد.</p>
       </ng-template>
     </div>
   </div>

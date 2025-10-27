@@ -8,24 +8,48 @@
     <div class="card-body">
       <h5 class="card-title mb-3">الدرجات الخاصة بـ {{ userEmail }}</h5>
 
-      <table class="table table-striped" *ngIf="grades$ | async as grades; else noGrades">
-        <thead class="table-dark">
-          <tr>
-            <th>الامتحان</th>
-            <th>الدرجة</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let grade of grades">
-            <td>{{ grade.exam }}</td>
-            <td>{{ grade.grade }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- Week selector -->
+      <!-- Show loading spinner only if loading -->
+      <div *ngIf="loading" class="text-center my-3">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">جاري التحميل...</span>
+        </div>
+        <p>جاري تحميل الدرجات...</p>
+      </div>
 
-      <ng-template #noGrades>
-        <p class="text-center text-muted mt-3">لا توجد درجات بعد.</p>
-      </ng-template>
+      <!-- Show week selector and table only if not loading -->
+      <div *ngIf="!loading">
+        <div *ngIf="weekNumbers.length > 0" class="mb-3">
+          <label for="weekSelect" class="form-label">اختر الأسبوع:</label>
+          <select id="weekSelect" class="form-select" [(ngModel)]="selectedWeek" (change)="filterWeek()">
+            <option [ngValue]="null">كل الأسابيع</option>
+            <option *ngFor="let week of weekNumbers" [ngValue]="week">الأسبوع {{ week }}</option>
+          </select>
+        </div>
+
+        <table class="table table-striped" *ngIf="filteredGrades.length > 0; else noGrades">
+          <thead class="table-dark">
+            <tr>
+              <th>الاسبوع</th>
+              <th>درجة التقييم</th>
+              <th>امتحان</th>
+              <th>مواظبة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let grade of filteredGrades">
+              <td>{{grade.week}}</td>
+              <td>{{ grade.daraga }}</td>
+              <td>{{ grade.emthan }}</td>
+              <td>{{ grade.mwazba }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ng-template #noGrades>
+          <p class="text-center text-muted mt-3">لا توجد درجات لهذا الأسبوع بعد.</p>
+        </ng-template>
+      </div>
+
     </div>
   </div>
-</div>

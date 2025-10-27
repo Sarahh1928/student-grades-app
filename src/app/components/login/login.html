@@ -32,6 +32,9 @@
       <button type="submit" class="btn btn-primary w-100">دخول</button>
     </form>
 
+    <div *ngIf="message" class="alert alert-danger text-center mt-3">
+      {{ message }}
+    </div>
     <p class="text-center mt-3 mb-0">
       لا تمتلك حساباً؟
       <a routerLink="/signup" class="text-decoration-none">سجّل الآن</a>

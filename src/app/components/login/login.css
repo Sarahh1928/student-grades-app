@@ -5,3 +5,8 @@ body {
 .card {
   border-radius: 12px;
 }
+.alert {
+  font-size: 15px;
+  direction: rtl;
+  font-family: "Cairo", sans-serif;
+}

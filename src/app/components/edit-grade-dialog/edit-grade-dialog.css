@@ -1,0 +1,73 @@
+:host {
+  display: block;
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+  text-align: right;
+  padding: 10px;
+}
+
+h2[mat-dialog-title] {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #2e2e2e;
+  border-bottom: 2px solid #1976d2;
+  padding-bottom: 8px;
+}
+
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+input.form-control {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+input.form-control:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 3px rgba(25, 118, 210, 0.3);
+}
+
+mat-dialog-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+button[mat-button] {
+  color: #555;
+  font-weight: 500;
+}
+
+button[color="primary"] {
+  background-color: #1976d2;
+  color: #fff;
+  border-radius: 8px;
+  padding: 6px 14px;
+  transition: background-color 0.2s ease;
+}
+
+button[color="primary"]:hover {
+  background-color: #0f5bb5;
+}
